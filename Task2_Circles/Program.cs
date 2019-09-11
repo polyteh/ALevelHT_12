@@ -18,9 +18,15 @@ namespace Task2_Circles
                 Circle myCircle1 = new Circle(new Point(0, 0), 12);
                 Circle myCircle2 = new Circle(new Point(3, 5), 11);
 
+                // check for square
                 Console.WriteLine($"We compare circles\n{myCircle1.ToString()}\nand\n{myCircle2.ToString()}");
-
                 Console.WriteLine(myCircle1 == myCircle2 ? $"Equal" : $"Not equal");
+
+                // check if point is on the circle line
+                Point firstPoint = new Point(0, 12);
+                Point secondPoint = new Point(0, 1);
+                Console.WriteLine(myCircle1.isPointOnTheCircleLine(firstPoint) ? $"Point on the line" : $"Point is far");
+                Console.WriteLine(myCircle1.isPointOnTheCircleLine(secondPoint) ? $"Point on the line" : $"Point is far");
 
             }
             catch (ArgumentOutOfRangeException e)

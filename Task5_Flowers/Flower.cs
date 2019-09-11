@@ -8,7 +8,7 @@ namespace Task5_Flowers
 {
     public class Flower
     {
-        // foh hash code
+        // for hash code
         private static int flowerID=0;
 
         public Flower(string _name, string _colour, int _price)

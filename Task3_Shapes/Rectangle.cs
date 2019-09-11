@@ -7,44 +7,67 @@ using System.Threading.Tasks;
 
 namespace Task3_Shapes
 {
-    public class Rectangle:Polygon, IShapes
+    public class Rectangle : Polygon
     {
-        public Rectangle(Point _leftToptPoint, int lenght, int height)
+        public Rectangle(List<Point> _listOfTops) : base(_listOfTops)
         {
-            if (lenght<=0||height<=0)
+
+            if (sidesLenght[0] != sidesLenght[2] || sidesLenght[1] != sidesLenght[3])
             {
-                throw new IndexOutOfRangeException("dimension should be positive");
+                throw new IndexOutOfRangeException("it is not a rectangle");
             }
+        }
+        /*
+        public Rectangle(Point _leftToptPoint, Point _rightTopPoint, Point _rightBottomPoint, Point _leftBottomPoint)
+        {
             topPoints.Add(_leftToptPoint);
-            topPoints.Add(new Point(_leftToptPoint.X-lenght, _leftToptPoint.Y));
-            topPoints.Add(new Point(_leftToptPoint.X - lenght, _leftToptPoint.Y-height));
-            topPoints.Add(new Point(_leftToptPoint.X, _leftToptPoint.Y - height));
+            topPoints.Add(_rightTopPoint);
+            topPoints.Add(_rightBottomPoint);
+            topPoints.Add(_leftBottomPoint);
+            this.ScaleCoeff = 1;
+            this.CalculateLenght();
+
+            if (sidesLenght[0] !=sidesLenght[2] || sidesLenght[1] != sidesLenght[3])
+            {
+                throw new IndexOutOfRangeException("it is not a rectangle");
+            }
+        }
+        */
+        public override double GetSquare()
+        {
+            this.polygonSquare = sidesLenght[0] * sidesLenght[1];
+            return this.polygonSquare;
         }
 
-        public double Square
-        {
-            get { return 1; }
-        }
-
- 
-        public double GetPerimeter()
-        {
-            Console.WriteLine("Rectangle perimeter");
-            return 10;
-        }
         public int GetNumberOfPoints()
         {
             Console.WriteLine("Rectangle number of points");
             return this.topPoints.Count;
         }
-        public void MoveLeft()
-        {
 
-            for (int i = 0; i < topPoints.Count; i++)
-            {
-                topPoints[i] = new Point(topPoints[i].X - 1, topPoints[i].Y - 1);
-            }
+        public override string ToString()
+        {
+            string defSitring = String.Format($"Coorditanes\n({this.topPoints[0].X},{this.topPoints[0].Y})\t({this.topPoints[1].X},{this.topPoints[1].Y})\n" +
+                $"({this.topPoints[3].X},{this.topPoints[3].Y})\t({this.topPoints[2].X},{this.topPoints[2].Y})");
+            return defSitring;
         }
+        public static Rectangle operator ++(Rectangle curTriangle)
+        {
+            curTriangle.ScaleCoeff *= 2;
+            List<Point> newCoord = curTriangle.Resize(curTriangle.ScaleCoeff);
+
+            return new Rectangle(newCoord);
+        }
+        public static Rectangle operator --(Rectangle curTriangle)
+        {
+            curTriangle.ScaleCoeff *= 0.5;
+            List<Point> newCoord = curTriangle.Resize(curTriangle.ScaleCoeff);
+
+            return new Rectangle(newCoord);
+        }
+
+
+
 
     }
 }

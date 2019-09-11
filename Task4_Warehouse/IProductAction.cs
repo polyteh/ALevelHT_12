@@ -4,10 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task3_Shapes
+namespace Task4_Warehouse
 {
-    public abstract class Shapes
+    public interface IProductAction
     {
+        void UpdateQuality();
+
+
+        void MakeDiscount();
 
     }
 }

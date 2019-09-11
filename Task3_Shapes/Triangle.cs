@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 
 namespace Task3_Shapes
 {
-    public class Triangle : Polygon, IShapes
+    public class Triangle : Polygon
     {
-
-        public Triangle(Point _firstPoint, Point _secondPoint, Point _thirdPoint)
+        public Triangle(List<Point> _listOfTops) : base(_listOfTops)
         {
 
+        }
+
+        /*
+        public Triangle(Point _firstPoint, Point _secondPoint, Point _thirdPoint)
+        {
             topPoints.Add(_firstPoint);
             topPoints.Add(_secondPoint);
             topPoints.Add(_thirdPoint);
@@ -20,28 +24,20 @@ namespace Task3_Shapes
             this.ScaleCoeff = 1;
             this.CalculateLenght();
         }
+        */
 
-
-        public double Square
+        public override double GetSquare()
         {
-            get
+            double polusumma = 0.5 * sidesLenght.Sum();
+            double underSq = polusumma;
+            foreach (var item in sidesLenght)
             {
-                double polusumma = 0.5 * sidesLenght.Sum();
-                double underSq = polusumma;
-                foreach (var item in sidesLenght)
-                {
-                    underSq *= (polusumma - item);
-                }
-                this.shapeSquare = Math.Pow(underSq, 0.5);
-                return this.shapeSquare;
+                underSq *= (polusumma - item);
             }
+            this.polygonSquare = Math.Pow(underSq, 0.5);
+            return this.polygonSquare;
         }
 
-        public double GetPerimeter()
-        {
-            Console.WriteLine("Rectangle perimeter");
-            return 10;
-        }
         public int GetNumberOfPoints()
         {
             Console.WriteLine("Rectangle number of points");
@@ -53,14 +49,14 @@ namespace Task3_Shapes
             curTriangle.ScaleCoeff *= 2;
             List<Point> newCoord = curTriangle.Resize(curTriangle.ScaleCoeff);
 
-            return new Triangle(newCoord[0], newCoord[1], newCoord[2]);
+            return new Triangle(newCoord);
         }
 
         public static Triangle operator --(Triangle curTriangle)
         {
             curTriangle.ScaleCoeff *= 0.5;
             List<Point> newCoord = curTriangle.Resize(curTriangle.ScaleCoeff);
-            return new Triangle(newCoord[0], newCoord[1], newCoord[2]);
+            return new Triangle(newCoord);
         }
 
         public override string ToString()
@@ -70,14 +66,6 @@ namespace Task3_Shapes
             return defSitring;
         }
 
-        public void MoveLeft()
-        {
-
-            for (int i = 0; i < topPoints.Count; i++)
-            {
-                topPoints[i] = new Point(topPoints[i].X - 1, topPoints[i].Y - 1);
-            }
-        }
 
     }
 }

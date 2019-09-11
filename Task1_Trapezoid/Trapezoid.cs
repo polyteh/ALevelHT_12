@@ -66,7 +66,7 @@ namespace Task1_Trapezoid
 
         private void CalculateSides()
         {
-            // i dont know how: is current realization is good? or it is better to check right index for the limit on the each step and make
+            // i dont know how: is current realization good? or it is better to check index for the limit on the each step  with if and make
             // all calculation inside for statement?
             for (int i = 0; i < sideLenght.Length - 1; i++)
             {
@@ -87,7 +87,7 @@ namespace Task1_Trapezoid
 
             // calculate square
             this.trapezSquare = ((this.sideLenght[0] + this.sideLenght[2]) / 2) * (this.trapezTops[0].Y - this.trapezTops[3].Y);
-           
+
         }
 
 

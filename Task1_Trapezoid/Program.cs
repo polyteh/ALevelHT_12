@@ -10,7 +10,7 @@ namespace Task1_Trapezoid
     class Program
     {
         static void Main(string[] args)
-        { 
+        {
             // make trapezoid list
             List<Trapezoid> myTestTrapez = new List<Trapezoid>()
             {
@@ -27,21 +27,21 @@ namespace Task1_Trapezoid
             Console.WriteLine(new string('=', 50));
 
             // calculate average square
-            double averageSquare = myTestTrapez.Average(trapez=>trapez.Square);
+            double averageSquare = myTestTrapez.Average(trapez => trapez.Square);
 
             // make list of trapezoid with square greater than average
-            IEnumerable<Trapezoid> squareAboveAverage = myTestTrapez.Where(trapez=> trapez.Square>averageSquare);
-            Console.WriteLine($"Only {squareAboveAverage.Count()} have square greater than average (average square is {averageSquare:0.##}). They names are");
+            IEnumerable<Trapezoid> squareAboveAverage = myTestTrapez.Where(trapez => trapez.Square > averageSquare);
+            Console.WriteLine($"Only {squareAboveAverage.Count()} trapezoid have square greater than average (average square is {averageSquare:0.##}). They names are");
 
             foreach (var trapez in squareAboveAverage)
             {
                 Console.WriteLine($"Trapez {trapez.Name}");
             }
-            Console.WriteLine(new string('=',50));
+            Console.WriteLine(new string('=', 50));
 
             // check two trapezoid for if is isosceles
-            Console.WriteLine(myTestTrapez[0].IsIsosceles()?$"Trapez {myTestTrapez[0].Name} is isosceles": $"Trapez {myTestTrapez[0].Name} is not isosceles");
-            Console.WriteLine(myTestTrapez[3].IsIsosceles()?$"Trapez {myTestTrapez[3].Name} is isosceles" :$"Trapez {myTestTrapez[3].Name} is not isosceles");
+            Console.WriteLine(myTestTrapez[0].IsIsosceles() ? $"Trapez {myTestTrapez[0].Name} is isosceles" : $"Trapez {myTestTrapez[0].Name} is not isosceles");
+            Console.WriteLine(myTestTrapez[3].IsIsosceles() ? $"Trapez {myTestTrapez[3].Name} is isosceles" : $"Trapez {myTestTrapez[3].Name} is not isosceles");
 
             Console.ReadKey();
 

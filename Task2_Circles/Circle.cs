@@ -10,14 +10,17 @@ namespace Task2_Circles
     public class Circle
     {
         private Point circleCenter;
-        private double circleRaius;
+        private int circleRaius;
         private double circleSquare;
+        private double circleLength;
+        // I understand that coordinates is int only and it is garbage, but make new class..?
+        private double tolerance = 0.05;
 
-        public Circle(Point _center, double _radius)
+        public Circle(Point _center, int _radius)
         {
             this.circleCenter = _center;
             // if radius negative we throw exeption
-            if (_radius>0)
+            if (_radius > 0)
             {
                 this.circleRaius = _radius;
             }
@@ -25,14 +28,34 @@ namespace Task2_Circles
             {
                 throw new ArgumentOutOfRangeException("Radius should be positive");
             }
-            
+
         }
 
         public double Square()
         {
-            circleSquare = Math.PI * Math.Pow(this.circleRaius,2) * 0.5;
+            circleSquare = Math.PI * Math.Pow(this.circleRaius, 2) * 0.5;
             return circleSquare;
         }
+
+        public double Length()
+        {
+            circleLength = 2 * Math.PI * this.circleRaius;
+            return circleSquare;
+        }
+
+        public bool isPointOnTheCircleLine(Point pointToCheck)
+        {
+            double distanceToPoint = Math.Pow((Math.Pow((this.circleCenter.X - pointToCheck.X), 2) + Math.Pow((this.circleCenter.Y - pointToCheck.Y), 2)), 0.5) - this.circleRaius;
+
+            distanceToPoint = Math.Abs(distanceToPoint);
+            if (distanceToPoint < tolerance)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
 
         public bool IsSquareEqual(Circle firstCircle, Circle secondCircle)
         {
@@ -50,7 +73,7 @@ namespace Task2_Circles
             return this.circleRaius == circleToCompare.circleRaius;
         }
 
-        public static bool operator == (Circle circleFirst, Circle circleSecond)
+        public static bool operator ==(Circle circleFirst, Circle circleSecond)
         {
             return circleFirst.Equals(circleSecond);
         }
